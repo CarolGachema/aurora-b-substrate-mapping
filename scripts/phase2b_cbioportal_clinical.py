@@ -1,14 +1,7 @@
 """
-Aurora B Substrate Mapping — Phase 2b: cBioPortal Clinical Recon
+Aurora B Substrate Mapping 
+Phase 2b: cBioPortal Clinical Recon
 --------------------------------------------------------------------
-The cptac package's own clinical table has NO usable ER/PR/HER2 data
-for this cohort (checked in phase2a — the fields exist but are 100%
-empty). This is a known gap in that specific release.
-
-Good news: this exact same CPTAC-BRCA cohort is also hosted on
-cBioPortal (study ID: brca_cptac_2020), which typically has full
-receptor-status annotation. cBioPortal has a free public REST API —
-no package install, no auth, just plain HTTP requests.
 
 This script:
   1. Lists all available clinical attributes for the study, so we can
@@ -17,7 +10,6 @@ This script:
   3. Checks whether patient IDs match the "01BR001"-style IDs used by
      the phosphoproteomics table from Phase 2a (needed to join later).
 
-Just run this and paste me everything it prints.
 """
 
 import requests
@@ -28,7 +20,7 @@ STUDY_ID = "brca_cptac_2020"
 
 
 def main():
-    # --- Step 1: list clinical attributes available for this study ---
+    # list clinical attributes available for this study 
     print("=" * 60)
     print("AVAILABLE CLINICAL ATTRIBUTES")
     print("=" * 60)
@@ -44,7 +36,7 @@ def main():
     print("\nAttributes that look receptor/subtype-related:")
     print(relevant[["clinicalAttributeId", "displayName", "description"]].to_string())
 
-    # --- Step 2: pull full patient-level clinical data ---
+    # pull full patient-level clinical data 
     print("\n" + "=" * 60)
     print("PATIENT CLINICAL DATA")
     print("=" * 60)
@@ -67,7 +59,7 @@ def main():
     print(list(wide.index[:10]))
 
     # Two ID formats seem to be mixed in this study ("X01BR001" vs
-    # "CPT000814"). Split them apart so we can see how many of each
+    # "CPT000814"). This splits them apart so we can see how many of each
     # exist, and whether the "X01BR..." ones (after stripping the "X")
     # actually match our phosphoproteomics table's "01BR..." IDs.
     x_prefixed = [i for i in wide.index if i.upper().startswith("X0") or i.upper().startswith("X1")]
