@@ -5,7 +5,7 @@
 ![Status](https://img.shields.io/badge/status-phases%201--6%20complete-brightgreen)
 
 Computational identification of Aurora B kinase substrates driving chromosomal
-instability (CIN) in triple-negative breast cancer (TNBC) — a pure dry-lab
+instability (CIN) in triple-negative breast cancer (TNBC), a pure dry-lab
 pipeline producing a ranked, evidence-backed candidate list for future
 experimental validation.
 
@@ -23,7 +23,7 @@ sources — no single line of evidence is trusted alone.
 ranked by a composite score combining motif strength, real-tumor
 phosphorylation, mitotic network proximity, and clinical CIN correlation.
 
-Headline candidates worth highlighting:
+### Headline candidates
 - **NDC80 S55** — a literal core kinetochore component; its N-terminal tail is
   a well-established Aurora B target in the literature. The pipeline
   re-discovered it independently, without that being hard-coded anywhere.
@@ -32,10 +32,7 @@ Headline candidates worth highlighting:
 - **RGL2 S736** — structurally confirmed surface-exposed (manually verified in
   Mol*, PDB 8B69), on top of real-tumor phosphorylation and motif evidence.
 
-![PSSM score distribution](figures/fig1_pssm_score_distribution.png)
-![Why hub filtering matters](figures/fig1_hub_filtering_impact.png)
-![Known vs orphan TNBC evidence](figures/fig2_known_vs_orphan_tnbc.png)
-![Top combined-evidence candidates](figures/fig4_top_combined_evidence.png)
+
 
 ## Pipeline
 
