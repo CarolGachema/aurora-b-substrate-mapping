@@ -1,5 +1,6 @@
 """
-Aurora B Substrate Mapping — Phase 2e: TNBC Phosphoproteomic Filter
+Aurora B Substrate Mapping 
+Phase 2e: TNBC Phosphoproteomic Filter
 ------------------------------------------------------------------
 Phase 2d's reports.
   - Phospho columns are a MultiIndex: (Name=gene symbol, Site, Peptide,
