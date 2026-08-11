@@ -1,30 +1,17 @@
 """
 Aurora B Substrate Mapping — Phase 2d: Phosphoproteomics Recon
 ------------------------------------------------------------------
-Phases 2a-2c gave us two clean building blocks:
-  - tnbc_status_by_patient.csv (Phase 2c): which patients are TNBC.
-  - aurkb_candidate_sites_pssm.csv (Phase 1b): candidate sites, indexed
-    by UniProt ID + amino acid position.
+Two things are still unknown:
 
-Before writing the real "keep only candidates actually observed
-phosphorylated in TNBC tissue" filter, we need to see the ACTUAL shape
-of the phosphoproteomics table, because two things are still unknown:
-
-  1. ID format — Phase 1's candidates are UniProt ID + position.
+  1. ID format: Phase 1's candidates are UniProt ID + position.
      CPTAC phosphoproteomics tables are usually indexed by GENE SYMBOL
-     (sometimes gene + site as a MultiIndex), not UniProt ID. If we
-     don't resolve this mapping explicitly, a join will silently
-     return near-zero matches and look like "nothing overlaps
-     biologically" when it's really just an ID mismatch (same failure
-     mode as the X01BR001 issue from Phase 2b/2c, one level deeper).
+     (sometimes gene + site as a MultiIndex).
 
-  2. Sample composition — CPTAC tables often include BOTH tumor and
+  2. Sample composition: CPTAC tables often include BOTH tumor and
      adjacent-normal columns per patient. We only want tumor samples,
      and only the ones flagged TNBC-positive in tnbc_status_by_patient.csv.
 
-This script only inspects and reports — no filtering logic yet.
-Run it, paste me everything it prints, and I'll write the real
-Phase 2d filter using the actual structure instead of guessing it.
+This script only inspects.
 """
 
 import re
@@ -40,9 +27,9 @@ TNBC_STATUS_CSV = DATA_DIR / "tnbc_status_by_patient.csv"
 PROTEOME_FASTA = DATA_DIR / "human_reviewed_proteome.fasta"
 
 
-# ---------------------------------------------------------------
-# STEP 1 — Load phosphoproteomics (same source-fallback logic as 2a)
-# ---------------------------------------------------------------
+
+#  Load phosphoproteomics 
+
 def load_phosphoproteomics():
     print("Loading CPTAC BRCA phosphoproteomics...")
     brca = cptac.Brca()
@@ -56,9 +43,9 @@ def load_phosphoproteomics():
     raise RuntimeError("No phosphoproteomics source worked — paste this output and we'll adjust.")
 
 
-# ---------------------------------------------------------------
-# STEP 2 — Inspect column structure (gene symbol? multi-index? peptide?)
-# ---------------------------------------------------------------
+
+#  Inspect column structure (gene symbol? multi-index? peptide?)
+
 def inspect_columns(phospho: pd.DataFrame):
     print("\n" + "=" * 60)
     print("COLUMN STRUCTURE")
@@ -74,9 +61,8 @@ def inspect_columns(phospho: pd.DataFrame):
         print(phospho.columns[:20].tolist())
 
 
-# ---------------------------------------------------------------
-# STEP 3 — Inspect sample/patient ID overlap with the TNBC list
-# ---------------------------------------------------------------
+
+# Inspect sample/patient ID overlap with the TNBC list
 def inspect_samples(phospho: pd.DataFrame, tnbc_status: pd.DataFrame):
     print("\n" + "=" * 60)
     print("SAMPLE / PATIENT ID OVERLAP")
@@ -84,7 +70,7 @@ def inspect_samples(phospho: pd.DataFrame, tnbc_status: pd.DataFrame):
     print("First 10 row index values (samples):", phospho.index[:10].tolist())
     print(f"Total samples in phospho table: {len(phospho.index)}")
 
-    # Flag anything that looks like a normal-tissue or replicate suffix
+    
     suffix_like = [i for i in phospho.index if not str(i)[-1].isdigit()]
     print(f"\nSample IDs with a non-numeric ending (possible normal-tissue "
           f"or replicate flag): {len(suffix_like)}")
@@ -101,9 +87,9 @@ def inspect_samples(phospho: pd.DataFrame, tnbc_status: pd.DataFrame):
         print("Examples of non-matching phospho sample IDs:", unmatched[:10])
 
 
-# ---------------------------------------------------------------
-# STEP 4 — Build uniprot_id -> gene_symbol map from the FASTA headers
-# ---------------------------------------------------------------
+
+# Build uniprot_id -> gene_symbol map from the FASTA headers
+
 def load_gene_symbol_map(fasta_path: Path) -> dict:
     print("\nBuilding uniprot_id -> gene_symbol map from proteome FASTA (GN= field)...")
     mapping = {}
@@ -117,9 +103,6 @@ def load_gene_symbol_map(fasta_path: Path) -> dict:
     return mapping
 
 
-# ---------------------------------------------------------------
-# STEP 5 — Rough check: do candidate genes even show up as phospho columns?
-# ---------------------------------------------------------------
 def inspect_candidate_overlap(phospho: pd.DataFrame, candidates: pd.DataFrame, gene_map: dict):
     print("\n" + "=" * 60)
     print("CANDIDATE SITE <-> PHOSPHO COLUMN OVERLAP (rough check)")
@@ -132,8 +115,6 @@ def inspect_candidate_overlap(phospho: pd.DataFrame, candidates: pd.DataFrame, g
     if isinstance(phospho.columns, pd.MultiIndex):
         col_genes = set(phospho.columns.get_level_values(0))
     else:
-        # crude guess until we see the real format: gene symbol is likely
-        # the text before the first '-' or '_' in the column name
         col_genes = set(str(c).split("-")[0].split("_")[0] for c in phospho.columns)
 
     candidate_genes = set(candidates["gene_symbol"].dropna())
