@@ -1,28 +1,19 @@
 """
-Aurora B Substrate Mapping — Phase 1b: Empirical Motif Building
+Aurora B Substrate Mapping 
+Phase 1b: Empirical Motif Building
 ------------------------------------------------------------------
-Phase 1 used a literature-guessed regex motif and got poor recovery
-(28.1%) with a flood of meaningless hits (51k). That tells us the
-guessed pattern isn't a real discriminator on its own.
 
-This phase fixes that by building the motif FROM DATA instead of
+This phase builds the motif FROM DATA instead of
 guessing it: it pulls the real sequence window around each of the
 281 known AURKB sites (from OmniPath), and uses those to build a
-Position-Specific Scoring Matrix (PSSM) — a per-position log-odds
+Position-Specific Scoring Matrix (PSSM), a per-position log-odds
 score for every amino acid, relative to how common that amino acid
 is in the proteome generally. Every Ser/Thr in the human proteome is
 then scored against this matrix, giving a ranked, continuous score
 instead of a crude yes/no regex match.
 
-Reuses the proteome FASTA already downloaded in Phase 1 — no new
-downloads needed.
+Reuses the proteome FASTA already downloaded in Phase 1 
 
-IMPORTANT CAVEAT (be upfront about this in your writeup): this PSSM
-is built and evaluated on the SAME 281 known sites, so the recovery
-check below is a consistency check, not a true generalization
-estimate. A stricter version would hold out some known sites for
-testing — flagged as a natural "next iteration" if you want to push
-the rigor further later.
 """
 
 import math
@@ -47,14 +38,13 @@ AMINO_ACIDS = list("ACDEFGHIKLMNPQRSTVWY")
 
 # Which percentile of the KNOWN site score distribution to use as the final
 # cutoff. Lower = keep more known sites (higher recall) but far more noise.
-# Higher = stricter, fewer false leads, but you'll miss more real positives.
-# The sweep table printed below shows the actual tradeoff before this
-# number gets used — adjust it based on what you see, then rerun.
+# Higher = stricter, fewer false leads.
+
 CUTOFF_PERCENTILE = 50
 
 
 # ---------------------------------------------------------------
-# STEP 1 — Load the proteome into a lookup dict {uniprot_id: sequence}
+#  Load the proteome into a lookup dict {uniprot_id: sequence}
 # ---------------------------------------------------------------
 def load_proteome(fasta_path: Path) -> dict:
     print("Loading proteome into memory...")
@@ -67,7 +57,7 @@ def load_proteome(fasta_path: Path) -> dict:
 
 
 # ---------------------------------------------------------------
-# STEP 2 — Pull known AURKB substrate sites from OmniPath
+#  Pull known AURKB substrate sites from OmniPath
 # ---------------------------------------------------------------
 def load_known_aurkb_sites() -> pd.DataFrame:
     print("Querying OmniPath for known AURKB substrate sites...")
@@ -79,7 +69,7 @@ def load_known_aurkb_sites() -> pd.DataFrame:
 
     # OmniPath aggregates multiple source databases, so the same site can
     # appear more than once (once per source that reported it). Dedupe so
-    # every downstream count reflects unique biological sites, not rows.
+    # every downstream count reflects unique biological sites.
     n_before = len(known)
     known = known.drop_duplicates(subset=["uniprot_id", "position"])
     n_duplicates = n_before - len(known)
@@ -90,13 +80,14 @@ def load_known_aurkb_sites() -> pd.DataFrame:
     return known
 
 
-# ---------------------------------------------------------------
-# STEP 3 — Extract the real sequence window around each known site
-# ---------------------------------------------------------------
+# -----------------------------------------------------------------
+# Extract the real sequence window around each known site
+# -----------------------------------------------------------------
+
 def extract_window(seq: str, position_1based: int, flank: int = FLANK) -> str | None:
     site_idx = position_1based - 1  # convert to 0-based
     start = site_idx - flank
-    end = site_idx + flank  # exclusive -> gives `flank*2` residues total
+    end = site_idx + flank  # exclusive - gives `flank*2` residues total
     if start < 0 or end > len(seq):
         return None
     return seq[start:end]
@@ -119,9 +110,8 @@ def build_known_windows(known_df: pd.DataFrame, proteome: dict) -> list[str]:
             n_boundary_skip += 1
             continue
 
-        # Sanity check: does the residue at this position actually match
-        # what OmniPath says it should be (S or T)? Mismatches usually mean
-        # a UniProt version/isoform difference between OmniPath and your
+        #  Mismatches usually mean
+        # a UniProt version/isoform difference between OmniPath and the
         # downloaded proteome.
         site_residue = window[FLANK]
         expected = row["residue_type"]
@@ -138,9 +128,10 @@ def build_known_windows(known_df: pd.DataFrame, proteome: dict) -> list[str]:
     return windows
 
 
-# ---------------------------------------------------------------
-# STEP 4 — Background amino acid frequency across the whole proteome
-# ---------------------------------------------------------------
+# -----------------------------------------------------------------
+#  Background amino acid frequency across the whole proteome
+# --------------------------------------------------------------------
+
 def compute_background_freq(proteome: dict) -> dict:
     counts = Counter()
     total = 0
@@ -151,7 +142,7 @@ def compute_background_freq(proteome: dict) -> dict:
 
 
 # ---------------------------------------------------------------
-# STEP 5 — Build the PSSM from known-site windows
+# Build the PSSM from known-site windows
 # ---------------------------------------------------------------
 def build_pssm(known_windows: list[str], background: dict) -> list[dict]:
     position_counts = [Counter() for _ in range(WINDOW_LEN)]
@@ -175,8 +166,8 @@ def score_window(window: str, pssm: list[dict]) -> float:
     return sum(pssm[i].get(aa, 0.0) for i, aa in enumerate(window))
 
 
-# ---------------------------------------------------------------
-# STEP 6 — Score every S/T in the proteome against the PSSM
+# --------------------------------------------------------------
+#  Score every S/T in the proteome against the PSSM
 # ---------------------------------------------------------------
 def scan_proteome_with_pssm(proteome: dict, pssm: list[dict]) -> pd.DataFrame:
     rows = []
@@ -213,7 +204,7 @@ def main():
     known_scores = sorted(score_window(w, pssm) for w in known_windows)
     all_scores_df = scan_proteome_with_pssm(proteome, pssm)
 
-    # --- Cutoff sweep: show the actual tradeoff instead of guessing one number ---
+    #  Cutoff sweep: show the actual tradeoff
     print("\nCutoff sweep (percentile of known-site scores | recovery | total candidates):")
     print(f"{'Percentile':>10} | {'Cutoff':>8} | {'Known recovered':>16} | {'Total candidates':>17}")
     for pct in (10, 25, 50, 75, 90):
