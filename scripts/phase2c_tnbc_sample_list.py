@@ -5,16 +5,16 @@ Builds a clean, patient-level TNBC status table from cBioPortal's
 brca_cptac_2020 study, ready to join against the phosphoproteomics
 data pulled via the cptac package.
 
-Two cleanup steps are required (confirmed from the Phase 2b recon):
+Two cleanup steps are required.
   1. Status values are inconsistently capitalized ("negative" vs
-     "Negative") — normalized here before use.
+     "Negative"), normalized here before use.
   2. cBioPortal prefixes numeric-style patient IDs with "X" (e.g.
      "X01BR001"), while the cptac package's phosphoproteomics table
      uses "01BR001" directly — stripped here so the two can be joined
      later. A handful of patients ("CPT000814"-style IDs) use a
      completely different naming scheme and won't match anything in
-     the phosphoproteomics table — that's expected, not a bug, and
-     they're just left as-is (they'll simply fail to join later).
+     the phosphoproteomics table, that's expected, and
+     they're just left as-is (they'll simply just fail to join later).
 """
 
 from pathlib import Path
@@ -74,7 +74,7 @@ def main():
     result["is_tnbc"] = result["tnbc_status"] == "Positive"
 
     # Flag which IDs are in the "won't join later" bucket, so it's visible
-    # now rather than silently losing patients further down the pipeline.
+    # now instead of silently losing patients further down the pipeline.
     unmatched_format = result[result["patient_id"] == result["patient_id_raw"]]
     unmatched_format = unmatched_format[~unmatched_format["patient_id_raw"].str.match(r"^\d")]
     if len(unmatched_format):
