@@ -26,7 +26,7 @@ OUTPUT_CSV = DATA_DIR / "aurkb_candidate_sites.csv"
 
 
 # ---------------------------------------------------------------
-# STEP 1 — Download the human reviewed (Swiss-Prot) proteome
+# Download the human reviewed (Swiss-Prot) proteome
 # ---------------------------------------------------------------
 def download_human_proteome(output_path: Path) -> None:
     if output_path.exists():
@@ -46,7 +46,7 @@ def download_human_proteome(output_path: Path) -> None:
 
 
 # ---------------------------------------------------------------
-# STEP 2 — Pull known AURKB substrates live from OmniPath
+# Pull known AURKB substrates live from OmniPath
 # ---------------------------------------------------------------
 def load_known_aurkb_sites() -> pd.DataFrame:
     """
@@ -58,8 +58,9 @@ def load_known_aurkb_sites() -> pd.DataFrame:
     df = Enzsub.get(enzymes="AURKB", genesymbols=True, organisms="human")
     print("Columns returned by OmniPath:", list(df.columns))
 
-    # Column names occasionally shift slightly between omnipath versions —
+    # Column names occasionally shift slightly between omnipath versions
     # if this KeyErrors, print(df.head()) and adjust the names below to match.
+    
     known = df[["substrate", "substrate_genesymbol", "residue_offset", "residue_type"]].copy()
     known.columns = ["uniprot_id", "substrate_name", "position", "residue_type"]
     known = known.dropna(subset=["position"])
@@ -70,7 +71,7 @@ def load_known_aurkb_sites() -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------
-# STEP 3 — Define the Aurora B consensus motif
+# Define the Aurora B consensus motif
 # ---------------------------------------------------------------
 # Literature consensus: [R/K]-x-[S/T]-[hydrophobic]
 #   position -2 : R or K
@@ -78,15 +79,15 @@ def load_known_aurkb_sites() -> pd.DataFrame:
 #   position  0 : S or T   <- the phosphorylated residue
 #   position +1 : hydrophobic (I, L, V, F, M, A)
 #
-# This is a simplification, not a trained model. Step 5 below checks
-# how many of your KNOWN sites this regex actually catches — if that
+# This is a simplification. Step 5 below checks
+# how many of the KNOWN sites this regex actually catches, if that
 # recovery rate is low, tighten/loosen the pattern before trusting it
 # on the full proteome scan.
 AURKB_MOTIF = re.compile(r"[RK].[ST][ILVFMA]")
 
 
 # ---------------------------------------------------------------
-# STEP 4 — Scan the proteome for motif matches
+# Scan the proteome for motif matches
 # ---------------------------------------------------------------
 def scan_proteome_for_motif(fasta_path: Path) -> pd.DataFrame:
     hits = []
@@ -114,7 +115,7 @@ def scan_proteome_for_motif(fasta_path: Path) -> pd.DataFrame:
 
 
 # ---------------------------------------------------------------
-# STEP 5 — Cross-reference against known AURKB sites
+# Cross-reference against known AURKB sites
 # ---------------------------------------------------------------
 def flag_known_sites(hits_df: pd.DataFrame, known_df: pd.DataFrame) -> pd.DataFrame:
     known_pairs = set(zip(known_df["uniprot_id"], known_df["position"]))
