@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Large or fully regenerable data -- re-created by running the pipeline
+# scripts, not worth committing (proteome FASTA alone is ~20MB+)
+data/human_reviewed_proteome.fasta
+data/pdb_cache/
+phase3_colabfold_inputs/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

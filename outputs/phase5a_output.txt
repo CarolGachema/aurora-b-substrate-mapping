@@ -1,0 +1,103 @@
+============================================================
+CHECKING STUDY EXISTS: brca_tcga_pan_can_atlas_2018
+============================================================
+Study found: Breast Invasive Carcinoma (TCGA, PanCancer Atlas)
+
+============================================================
+AVAILABLE CLINICAL ATTRIBUTES
+============================================================
+Total clinical attributes available: 60
+                           clinicalAttributeId                                                                                  displayName
+0                                          AGE                                                                                Diagnosis Age
+1                  AJCC_PATHOLOGIC_TUMOR_STAGE                               Neoplasm Disease Stage American Joint Committee on Cancer Code
+2                         AJCC_STAGING_EDITION                                  American Joint Committee on Cancer Publication Version Type
+3                             ANEUPLOIDY_SCORE                                                                             Aneuploidy Score
+4                          BUFFA_HYPOXIA_SCORE                                                                          Buffa Hypoxia Score
+5                                  CANCER_TYPE                                                                                  Cancer Type
+6                          CANCER_TYPE_ACRONYM                                                         TCGA PanCanAtlas Cancer Type Acronym
+7                         CANCER_TYPE_DETAILED                                                                         Cancer Type Detailed
+8                           DAYS_LAST_FOLLOWUP                            Last Communication Contact from Initial Pathologic Diagnosis Date
+9                                DAYS_TO_BIRTH                                                 Birth from Initial Pathologic Diagnosis Date
+10        DAYS_TO_INITIAL_PATHOLOGIC_DIAGNOSIS                       Last Alive Less Initial Pathologic Diagnosis Date Calculated Day Value
+11                                  DFS_MONTHS                                                                        Disease Free (Months)
+12                                  DFS_STATUS                                                                          Disease Free Status
+13                                  DSS_MONTHS                                                          Months of disease-specific survival
+14                                  DSS_STATUS                                                             Disease-specific Survival status
+15                                   ETHNICITY                                                                           Ethnicity Category
+16                        FORM_COMPLETION_DATE                                                                         Form completion date
+17                     FRACTION_GENOME_ALTERED                                                                      Fraction Genome Altered
+18                      GENETIC_ANCESTRY_LABEL                                                                       Genetic Ancestry Label
+19                                       GRADE                                                                    Neoplasm Histologic Grade
+20                   HISTORY_NEOADJUVANT_TRTYN                                Neoadjuvant Therapy Type Administered Prior To Resection Text
+21                                      ICD_10                                                                        ICD-10 Classification
+22                           ICD_O_3_HISTOLOGY  International Classification of Diseases for Oncology, Third Edition ICD-O-3 Histology Code
+23                                ICD_O_3_SITE       International Classification of Diseases for Oncology, Third Edition ICD-O-3 Site Code
+24                   INFORMED_CONSENT_VERIFIED                                                                    Informed consent verified
+25                    IN_PANCANPATHWAYS_FREEZE                                                                   In PanCan Pathway Analysis
+26                            MSI_SCORE_MANTIS                                                                             MSI MANTIS Score
+27                            MSI_SENSOR_SCORE                                                                              MSIsensor Score
+28                              MUTATION_COUNT                                                                               Mutation Count
+29     NEW_TUMOR_EVENT_AFTER_INITIAL_TREATMENT                                            New Neoplasm Event Post Initial Therapy Indicator
+30                               ONCOTREE_CODE                                                                                Oncotree Code
+31                                   OS_MONTHS                                                                    Overall Survival (Months)
+32                                   OS_STATUS                                                                      Overall Survival Status
+33                            OTHER_PATIENT_ID                                                                             Other Patient ID
+34                                PATH_M_STAGE                                     American Joint Committee on Cancer Metastasis Stage Code
+35                                PATH_N_STAGE                    Neoplasm Disease Lymph Node Stage American Joint Committee on Cancer Code
+36                                PATH_T_STAGE                                          American Joint Committee on Cancer Tumor Stage Code
+37               PERSON_NEOPLASM_CANCER_STATUS                                                                Person Neoplasm Cancer Status
+38                                  PFS_MONTHS                                                              Progress Free Survival (Months)
+39                                  PFS_STATUS                                                                      Progression Free Status
+40  PRIMARY_LYMPH_NODE_PRESENTATION_ASSESSMENT                                                   Primary Lymph Node Presentation Assessment
+41                                    PRIOR_DX                                                                              Prior Diagnosis
+42                                        RACE                                                                                Race Category
+43                           RADIATION_THERAPY                                                                            Radiation Therapy
+44                        RAGNUM_HYPOXIA_SCORE                                                                         Ragnum Hypoxia Score
+45                                SAMPLE_COUNT                                                                Number of Samples Per Patient
+46                                 SAMPLE_TYPE                                                                                  Sample Type
+47                                         SEX                                                                                          Sex
+48                              SOMATIC_STATUS                                                                               Somatic Status
+49                                     SUBTYPE                                                                                      Subtype
+50                                   TBL_SCORE                                                                             Tumor Break Load
+51     TISSUE_PROSPECTIVE_COLLECTION_INDICATOR                                                      Tissue Prospective Collection Indicator
+52   TISSUE_RETROSPECTIVE_COLLECTION_INDICATOR                                                    Tissue Retrospective Collection Indicator
+53                          TISSUE_SOURCE_SITE                                                                           Tissue Source Site
+54                     TISSUE_SOURCE_SITE_CODE                                                                      Tissue Source Site Code
+55                           TMB_NONSYNONYMOUS                                                                          TMB (nonsynonymous)
+56                           TUMOR_TISSUE_SITE                                                                  Tumor Disease Anatomic Site
+57                                  TUMOR_TYPE                                                                                   Tumor Type
+58                                      WEIGHT                                                                               Patient Weight
+59                        WINTER_HYPOXIA_SCORE                                                                         Winter Hypoxia Score
+
+CIN / subtype-relevant attributes found:
+              clinicalAttributeId                    displayName                                                                                                  description
+3                ANEUPLOIDY_SCORE               Aneuploidy Score                                                                                             Aneuploidy Score
+17        FRACTION_GENOME_ALTERED        Fraction Genome Altered                                                                                      Fraction Genome Altered
+26               MSI_SCORE_MANTIS               MSI MANTIS Score  MSI Score reported by MANTIS. The suggested thresholds are MSI: >0.6, Indeterminate: 0.4-0.6 and MSS: <0.4.
+27               MSI_SENSOR_SCORE                MSIsensor Score    MSI Score reported by MSIsensor. The suggested thresholds are MSI: >10, Indeterminate: 4-10 and MSS: <10.
+37  PERSON_NEOPLASM_CANCER_STATUS  Person Neoplasm Cancer Status                                                                               Person neoplasm cancer status.
+49                        SUBTYPE                        Subtype                                                                                                      Subtype
+
+============================================================
+MOLECULAR PROFILES (checking for mRNA expression data)
+============================================================
+                                                                   molecularProfileId                                                                       name molecularAlterationType
+0                                           brca_tcga_pan_can_atlas_2018_armlevel_cna                                 Putative arm-level copy-number from GISTIC           GENERIC_ASSAY
+1                                       brca_tcga_pan_can_atlas_2018_genetic_ancestry                                                           Genetic Ancestry           GENERIC_ASSAY
+2                                                 brca_tcga_pan_can_atlas_2018_gistic                               Putative copy-number alterations from GISTIC  COPY_NUMBER_ALTERATION
+3                                                brca_tcga_pan_can_atlas_2018_log2CNA                                                    Log2 copy-number values  COPY_NUMBER_ALTERATION
+4                           brca_tcga_pan_can_atlas_2018_methylation_hm27_hm450_merge                                         Methylation (HM27 and HM450 merge)           GENERIC_ASSAY
+5                                      brca_tcga_pan_can_atlas_2018_methylation_hm450                                                        Methylation (HM450)           GENERIC_ASSAY
+6                                              brca_tcga_pan_can_atlas_2018_mutations                                                                  Mutations       MUTATION_EXTENDED
+7                          brca_tcga_pan_can_atlas_2018_phosphoprotein_quantification        Phosphoprotein site level expression data by CPTAC (TMT, Log2ratio)           GENERIC_ASSAY
+8                                 brca_tcga_pan_can_atlas_2018_protein_quantification                                Protein levels (mass spectrometry by CPTAC)           PROTEIN_LEVEL
+9                         brca_tcga_pan_can_atlas_2018_protein_quantification_zscores                   Protein expression z-scores (mass spectrometry by CPTAC)           PROTEIN_LEVEL
+10                                       brca_tcga_pan_can_atlas_2018_rna_seq_v2_mrna      mRNA Expression, RSEM (Batch normalized from Illumina HiSeq_RNASeqV2)         MRNA_EXPRESSION
+11                        brca_tcga_pan_can_atlas_2018_rna_seq_v2_mrna_median_Zscores     mRNA expression z-scores relative to diploid samples (RNA Seq V2 RSEM)         MRNA_EXPRESSION
+12             brca_tcga_pan_can_atlas_2018_rna_seq_v2_mrna_median_all_sample_Zscores     mRNA expression z-scores relative to all samples (log RNA Seq V2 RSEM)         MRNA_EXPRESSION
+13  brca_tcga_pan_can_atlas_2018_rna_seq_v2_mrna_median_all_sample_ref_normal_Zscores  mRNA expression z-scores relative to normal samples (log RNA Seq V2 RSEM)         MRNA_EXPRESSION
+14                                                  brca_tcga_pan_can_atlas_2018_rppa                                                  Protein expression (RPPA)           PROTEIN_LEVEL
+15                                          brca_tcga_pan_can_atlas_2018_rppa_Zscores                                         Protein expression z-scores (RPPA)           PROTEIN_LEVEL
+16                                   brca_tcga_pan_can_atlas_2018_structural_variants                                                        Structural variants      STRUCTURAL_VARIANT
+
+Paste this whole output back and I'll write the real Phase 5 pull using whatever attribute names and profile IDs actually exist here.

@@ -1,0 +1,25 @@
+C:\Users\Gachema\miniconda3\envs\aurora-b\Lib\site-packages\sorted_nearest\__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\Gachema\miniconda3\envs\aurora-b\Lib\site-packages\cptac\cancers\umich\umichbrca.py:113: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  df[['Database_ID', 'Transcript_ID', "Gene_ID", "Havana_gene", "Havana_transcript", "Transcript", "Name",
+C:\Users\Gachema\miniconda3\envs\aurora-b\Lib\site-packages\cptac\cancers\umich\umichbrca.py:115: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  df[['num1', 'start', "end", "detected_phos", "localized_phos", "Site"]] = df.Site.str.split("_",
+Loading CPTAC BRCA phosphoproteomics (source=umich)...
+Loaded phosphoproteomics: (158, 63537)
+TNBC-positive samples present in phospho table: 29 / 158
+Exploded to 51191 unique (gene, residue, position) S/T sites.
+
+Detection-fraction sweep (min frac | sites passing | as % of exploded sites):
+  >= 0.0 |  51,191 | 100.0%
+  >= 0.1 |  39,567 | 77.3%
+  >= 0.2 |  28,816 | 56.3%  <- selected
+  >= 0.3 |  23,015 | 45.0%
+  >= 0.5 |  15,705 | 30.7%
+Building uniprot_id -> gene_symbol map from proteome FASTA...
+
+Saved 21293 candidates (all, with flags) to data\aurkb_candidates_tnbc_filtered.csv
+  -> 1482 ARE observed phosphorylated in TNBC tissue (>= 20% of 29 TNBC samples)
+  -> 5 had a gene+position hit but a residue-letter mismatch — likely UniProt/Ensembl numbering conflicts, worth spot-checking a few manually
+  -> 163 had no gene symbol at all and couldn't be checked
+
+Your real Phase 2 shortlist: the 1482 candidates with observed_in_tnbc == True, already sorted by pssm_score.

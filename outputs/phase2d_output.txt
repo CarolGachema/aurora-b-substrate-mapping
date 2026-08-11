@@ -1,0 +1,55 @@
+C:\Users\Gachema\miniconda3\envs\aurora-b\Lib\site-packages\sorted_nearest\__init__.py:1: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+C:\Users\Gachema\miniconda3\envs\aurora-b\Lib\site-packages\cptac\cancers\umich\umichbrca.py:113: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  df[['Database_ID', 'Transcript_ID', "Gene_ID", "Havana_gene", "Havana_transcript", "Transcript", "Name",
+C:\Users\Gachema\miniconda3\envs\aurora-b\Lib\site-packages\cptac\cancers\umich\umichbrca.py:115: PerformanceWarning: DataFrame is highly fragmented.  This is usually the result of calling `frame.insert` many times, which has poor performance.  Consider joining all columns at once using pd.concat(axis=1) instead. To get a de-fragmented frame, use `newframe = frame.copy()`
+  df[['num1', 'start', "end", "detected_phos", "localized_phos", "Site"]] = df.Site.str.split("_",
+Loading CPTAC BRCA phosphoproteomics...
+Loaded phosphoproteomics from source: umich
+
+Phosphoproteomics table shape: (158, 63537)
+
+============================================================
+COLUMN STRUCTURE
+============================================================
+Column index type: <class 'pandas.MultiIndex'>
+Column level names: ['Name', 'Site', 'Peptide', 'Database_ID']
+
+Level 0 sample values:
+['ARF5', 'M6PR', 'ESRRA', 'ESRRA', 'ESRRA', 'FKBP4', 'FKBP4', 'FKBP4', 'FKBP4', 'FKBP4']
+
+Level 1 sample values:
+['S137', 'S267', 'S22', 'S19S22', 'S22S26S27', 'S229', 'S229', 'S258', 'S263', 'Y302']
+
+Level 2 sample values:
+['QDMPNAMPVsELTDK', 'GVGDDQLGEEsEERDDHLLPM;GVGDDQLGEEsEER', 'AEPASPDsPKGSSETETEPPVALAPGPAPTR', 'AEPAsPDsPKGSSETETEPPVALAPGPAPTR', 'AEPASPDsPKGssETETEPPVALAPGPAPTR', 'GEHSIVYLKPSYAFGsVGK', 'PSYAFGsVGK', 'AKEsWEMNSEEK', 'AKESWEMNsEEK', 'KIVSWLEyESSFSNEEAQK']
+
+Level 3 sample values:
+['ENSP00000000233.5', 'ENSP00000000412.3', 'ENSP00000000442.6', 'ENSP00000000442.6', 'ENSP00000000442.6', 'ENSP00000001008.4', 'ENSP00000001008.4', 'ENSP00000001008.4', 'ENSP00000001008.4', 'ENSP00000001008.4']
+
+============================================================
+SAMPLE / PATIENT ID OVERLAP
+============================================================
+First 10 row index values (samples): ['01BR001', '01BR008', '01BR009', '01BR010', '01BR015', '01BR017', '01BR018', '01BR020', '01BR023', '01BR025']
+Total samples in phospho table: 158
+
+Sample IDs with a non-numeric ending (possible normal-tissue or replicate flag): 0
+
+Phospho sample IDs matching a known TNBC-status patient_id: 152 / 158
+Examples of non-matching phospho sample IDs: ['01BR008', '11BR057', '11BR058', '11BR076', '11BR078', '16BR012']
+
+Building uniprot_id -> gene_symbol map from proteome FASTA (GN= field)...
+Mapped 20306 UniProt IDs to gene symbols (some entries lack a GN= field and will be unmapped).
+
+============================================================
+CANDIDATE SITE <-> PHOSPHO COLUMN OVERLAP (rough check)
+============================================================
+Candidates with no gene symbol resolved: 163 / 21293
+
+Candidate gene symbols found among phospho columns: 4653 / 9652
+Sample overlap: ['HSP90AB1', 'TBC1D17', 'KRT75', 'ZNF354A', 'AKAP1', 'RBM15B', 'IKZF4', 'TTF2', 'TMEM94', 'ARHGAP22']
+Sample phospho column 'genes' for comparison: ['HSP90AB1', 'TBC1D17', 'KRT75', 'ZNF354A', 'DNM1', 'CMTM4', 'EIF3G', 'PDCD1', 'RASIP1', 'MBD1']
+
+============================================================
+Paste this whole output back and I'll write the real Phase 2d filter.
+============================================================

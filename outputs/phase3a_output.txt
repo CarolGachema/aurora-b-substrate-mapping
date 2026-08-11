@@ -1,0 +1,11 @@
+Fetching AURKB (human) entry from UniProt...
+Using UniProt accession Q96GD4, 344 aa.
+Found kinase domain annotation: residues 77-327 (251 aa).
+Loading proteome for peptide extraction...
+
+Building ColabFold inputs for top 25 orphan, TNBC-observed candidates...
+
+Wrote 25 per-candidate FASTA files to C:\Users\Gachema\Documents\MY PROJECTS\aurora-b-substrate-mapping\phase3_colabfold_inputs
+Manifest saved to phase3_colabfold_inputs\manifest.csv
+
+Next: zip the phase3_colabfold_inputs/ folder, upload it to the ColabFold batch notebook, and run. Bring back the output PDBs + confidence JSONs and I'll help you evaluate physical plausibility.

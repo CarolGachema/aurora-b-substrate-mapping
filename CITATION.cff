@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this pipeline or its output candidate list, please cite this repository."
+title: "Aurora B Substrate Mapping in Triple-Negative Breast Cancer"
+type: software
+authors:
+  - family-names: "[Your Last Name]"
+    given-names: "[Your First Name]"
+date-released: 2026-08-11
+url: "https://github.com/[your-username]/aurora-b-substrate-mapping"
+license: MIT

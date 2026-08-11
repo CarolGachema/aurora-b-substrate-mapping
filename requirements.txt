@@ -1,0 +1,8 @@
+pandas
+requests
+biopython
+omnipath
+cptac
+freesasa
+scipy
+matplotlib

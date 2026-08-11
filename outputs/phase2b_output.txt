@@ -1,0 +1,119 @@
+============================================================
+AVAILABLE CLINICAL ATTRIBUTES
+============================================================
+Total clinical attributes available: 36
+
+All attribute IDs:
+                   clinicalAttributeId                         displayName
+0                                  AGE                                 Age
+1                     APOBEC_SIGNATURE                    APOBEC Signature
+2                          CANCER TYPE                         Cancer type
+3                 CANCER_TYPE_DETAILED                Cancer Type Detailed
+4                      CD3_TILS_COUNTS                     CD3 TILS Counts
+5                      CD3_TILS_STATUS                     CD3 TILS Status
+6    CHROMOSOME_INSTABILITY_INDEX_CIN_   Chromosome INstability index CIN 
+7             CIBERSORT_ABSOLUTE_SCORE            CIBERSORT Absolute Score
+8                 ERBB2_GENE_AMPLIFIED                ERBB2 Gene Amplified
+9           ERBB2_PROTEOGENOMIC_STATUS          ERBB2 Proteogenomic Status
+10       ERBB2_UPDATED_CLINICAL_STATUS       ERBB2 Updated Clinical Status
+11          ER_UPDATED_CLINICAL_STATUS          ER Updated Clinical Status
+12               ESTIMATE_IMMUNE_SCORE               ESTIMATE Immune Score
+13              ESTIMATE_STROMAL_SCORE              ESTIMATE Stromal Score
+14                ESTIMATE_TUMORPURITY                ESTIMATE TumorPurity
+15                           ETHNICITY                           Ethnicity
+16            ISCHEMIA_TIME_IN_MINUTES            Ischemia Time in Minutes
+17                      MUTATION_COUNT                      Mutation Count
+18                         NMF_CLUSTER                         NMF Cluster
+19        NMF_CLUSTER_MEMBERSHIP_SCORE        NMF Cluster Membership Score
+20  NUMBER_OF_NON_SYNONYMOUS_MUTATIONS  Number of non synonymous Mutations
+21                       ONCOTREE CODE                       Oncotree code
+22                               PAM50                               PAM50
+23                  PR_CLINICAL_STATUS                  PR Clinical Status
+24                        SAMPLE_COUNT       Number of Samples Per Patient
+25                                 SEX                                 Sex
+26                      STEMNESS_SCORE                      Stemness Score
+27                   TMB_NONSYNONYMOUS                 TMB (nonsynonymous)
+28                         TMT_CHANNEL                         TMT Channel
+29                            TMT_PLEX                            TMT Plex
+30        TNBC_UPDATED_CLINICAL_STATUS        TNBC Updated Clinical Status
+31                TOP2A_GENE_AMPLIFIED                TOP2A Gene Amplified
+32          TOP2A_PROTEOGENOMIC_STATUS          TOP2A Proteogenomic Status
+33                         TUMOR_STAGE                         Tumor Stage
+34                  XCELL_IMMUNE_SCORE                  xCell Immune Score
+35                 XCELL_STROMAL_SCORE                 xCell Stromal Score
+
+Attributes that look receptor/subtype-related:
+              clinicalAttributeId                    displayName                                                                                                             description
+8            ERBB2_GENE_AMPLIFIED           ERBB2 Gene Amplified                   Significant gene copy number amplification; based on GISTIC2 calls: thresholded == 2 & continuous > 1
+9      ERBB2_PROTEOGENOMIC_STATUS     ERBB2 Proteogenomic Status                                      Proteogenomic ERBB2 status: gene copy amflification and outlier protein expression
+10  ERBB2_UPDATED_CLINICAL_STATUS  ERBB2 Updated Clinical Status                                                               Updated clinical ERRB2 status (central IHC for 68 tumors)
+11     ER_UPDATED_CLINICAL_STATUS     ER Updated Clinical Status                                                                  Updated clinical ER status (central IHC for 68 tumors)
+22                          PAM50                          PAM50                                                                                                    PAM50 classification
+23             PR_CLINICAL_STATUS             PR Clinical Status                                                                                              Initial clinical PR status
+30   TNBC_UPDATED_CLINICAL_STATUS   TNBC Updated Clinical Status  Triple Negative Breast Cancer (TNBC) status; based on PG ERBB2, updated clinical ER status; initial clinical PR status
+
+============================================================
+PATIENT CLINICAL DATA
+============================================================
+Raw shape (long format): (2849, 5)
+
+Columns: ['uniquePatientKey', 'patientId', 'studyId', 'clinicalAttributeId', 'value']
+
+Pivoted shape (wide format): (122, 24)
+
+First 10 patient IDs (checking ID format(s) present):
+['CPT000814', 'CPT001846', 'X01BR001', 'X01BR008', 'X01BR009', 'X01BR010', 'X01BR015', 'X01BR017', 'X01BR018', 'X01BR020']
+
+'X0...'-style IDs: 109
+Other-format IDs (e.g. 'CPT...'): 13
+Sample of the other format: ['CPT000814', 'CPT001846', 'X20BR001', 'X20BR002', 'X20BR005']
+
+Receptor/subtype columns actually present in the pivoted data: ['ERBB2_GENE_AMPLIFIED', 'ERBB2_PROTEOGENOMIC_STATUS', 'ERBB2_UPDATED_CLINICAL_STATUS', 'ER_UPDATED_CLINICAL_STATUS', 'PR_CLINICAL_STATUS', 'TNBC_UPDATED_CLINICAL_STATUS']
+
+Value counts for each:
+
+--- ERBB2_GENE_AMPLIFIED ---
+ERBB2_GENE_AMPLIFIED
+0    105
+1     17
+Name: count, dtype: int64
+
+--- ERBB2_PROTEOGENOMIC_STATUS ---
+ERBB2_PROTEOGENOMIC_STATUS
+Negative    86
+negative    21
+Positive    15
+Name: count, dtype: int64
+
+--- ERBB2_UPDATED_CLINICAL_STATUS ---
+ERBB2_UPDATED_CLINICAL_STATUS
+Negative     72
+NaN          19
+Positive     13
+negative     10
+equivocal     8
+Name: count, dtype: int64
+
+--- ER_UPDATED_CLINICAL_STATUS ---
+ER_UPDATED_CLINICAL_STATUS
+Positive    81
+Negative    39
+NaN          2
+Name: count, dtype: int64
+
+--- PR_CLINICAL_STATUS ---
+PR_CLINICAL_STATUS
+positive    66
+negative    35
+Negative    12
+NaN          7
+Positive     2
+Name: count, dtype: int64
+
+--- TNBC_UPDATED_CLINICAL_STATUS ---
+TNBC_UPDATED_CLINICAL_STATUS
+negative    55
+Negative    36
+Positive    28
+NaN          3
+Name: count, dtype: int64

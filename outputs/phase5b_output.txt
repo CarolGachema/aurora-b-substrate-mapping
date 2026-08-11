@@ -1,0 +1,56 @@
+Fetching SAMPLE-level clinical data (CIN metrics)...
+  19348 sample-level clinical records
+  Columns available: ['ANEUPLOIDY_SCORE', 'CANCER_TYPE', 'CANCER_TYPE_DETAILED', 'FRACTION_GENOME_ALTERED', 'MSI_SCORE_MANTIS', 'MSI_SENSOR_SCORE', 'MUTATION_COUNT', 'ONCOTREE_CODE', 'SAMPLE_TYPE', 'SOMATIC_STATUS', 'TBL_SCORE', 'TISSUE_PROSPECTIVE_COLLECTION_INDICATOR', 'TISSUE_RETROSPECTIVE_COLLECTION_INDICATOR', 'TISSUE_SOURCE_SITE', 'TISSUE_SOURCE_SITE_CODE', 'TMB_NONSYNONYMOUS', 'TUMOR_TISSUE_SITE', 'TUMOR_TYPE']
+Fetching PATIENT-level clinical data (subtype)...
+  SUBTYPE value counts:
+SUBTYPE
+BRCA_LumA      499
+BRCA_LumB      197
+BRCA_Basal     171
+NaN            103
+BRCA_Her2       78
+BRCA_Normal     36
+Name: count, dtype: int64
+
+171 patients with a Basal-like SUBTYPE call (TNBC proxy -- see caveat in the docstring).
+171 Basal-like samples with clinical data.
+CIN metrics available: ['ANEUPLOIDY_SCORE', 'FRACTION_GENOME_ALTERED']
+
+1070 unique TNBC-validated candidate genes to test.
+
+Mapping 1070 gene symbols to Entrez IDs (chunked)...
+  Mapped 1066 / 1070 symbols (4 not found -- often outdated/alias symbols)
+
+Fetching expression for 1066 genes across 171 samples (chunked)...
+  Retrieved 181773 expression data points
+
+171 samples with both CIN metrics and expression data -- running correlations...
+
+Saved 1063 gene correlations to data\phase5_cin_correlation.csv
+  -> 92 genes show a significant correlation (p<0.05) with ANEUPLOIDY_SCORE
+
+Top 10 positively correlated:
+gene_symbol  ANEUPLOIDY_SCORE_rho  ANEUPLOIDY_SCORE_pval  FRACTION_GENOME_ALTERED_rho  FRACTION_GENOME_ALTERED_pval  n_samples
+       SCAP              0.273359               0.000415                     0.093979                      0.221472        171
+     LARP4B              0.247272               0.001461                     0.117839                      0.124784        171
+     NBEAL2              0.244769               0.001638                    -0.175937                      0.021348        171
+      RAB18              0.239467               0.002079                     0.019494                      0.800214        171
+    PLEKHG1              0.239417               0.002084                    -0.055684                      0.469441        171
+       ACLY              0.229285               0.003239                     0.017167                      0.823646        171
+      CLCN7              0.221406               0.004507                    -0.039313                      0.609694        171
+     MAGED2              0.210887               0.006889                     0.123535                      0.107450        171
+     SHKBP1              0.209013               0.007415                    -0.013396                      0.861950        171
+       MAP4              0.208107               0.007682                    -0.116963                      0.127632        171
+
+Bottom 10 (most negatively correlated):
+gene_symbol  ANEUPLOIDY_SCORE_rho  ANEUPLOIDY_SCORE_pval  FRACTION_GENOME_ALTERED_rho  FRACTION_GENOME_ALTERED_pval  n_samples
+     CARD14             -0.220895               0.004603                     0.047054                      0.541109        171
+     PRKAB1             -0.235949               0.002428                    -0.010000                      0.896721        171
+    SHROOM2             -0.254168               0.001060                    -0.054446                      0.479395        171
+       P4HB             -0.260383               0.000788                     0.040887                      0.595439        171
+     HDGFL3             -0.270192               0.000486                     0.196542                      0.009982        171
+      MCTP2             -0.278869               0.000312                    -0.087041                      0.257628        171
+  EIF4ENIF1             -0.283010               0.000252                     0.078513                      0.307379        171
+      CANT1             -0.288276               0.000190                     0.133431                      0.081890        171
+    FAM169A             -0.289047               0.000182                    -0.136962                      0.074050        171
+       ST13             -0.291094               0.000163                     0.115256                      0.133326        171

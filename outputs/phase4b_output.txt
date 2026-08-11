@@ -1,0 +1,7 @@
+Loaded 1482 candidates from data\aurkb_candidates_network_context.csv
+Saved fig1_hub_filtering_impact.png
+Saved fig2_reference_gene_connectivity.png
+Saved fig3_partner_category_breakdown.png
+Saved fig4_top_combined_evidence.png
+
+All figures saved to C:\Users\Gachema\Documents\MY PROJECTS\aurora-b-substrate-mapping\figures

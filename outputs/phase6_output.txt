@@ -1,0 +1,24 @@
+Loaded 1482 candidate sites, 1063 gene-level CIN correlations.
+1473 / 1482 candidate sites have CIN correlation data (rest get a neutral score for this component, not a penalty).
+
+Saved composite ranking for 1482 candidate sites to data\phase6_composite_ranking.csv
+
+Sanity check: 18 / 20 top candidates are network hits (should be a mix, not all 20 -- if it's still all/none, the balance needs another look).
+
+Top 15 by composite score:
+gene_symbol residue  position  pssm_score  motif_z  direct_mitotic_interactor_specific  network_z  ANEUPLOIDY_SCORE_rho  ANEUPLOIDY_SCORE_pval    cin_z  composite_score        structural_note
+      CDK12       S       333    9.356375 1.209223                                True   2.071222              0.153262               0.050793 1.900573         1.000000 No structural data yet
+    TP53BP1       S      1686   10.765266 1.627485                                True   2.071222              0.095036               0.227534 0.949619         0.999325 No structural data yet
+      PRKCD       S       302   10.809438 1.634495                                True   2.071222              0.084657               0.282625 0.782282         0.998650 No structural data yet
+    SMARCC1       S       328    8.475425 0.664780                                True   2.071222              0.207577               0.007842 2.698541         0.997976 No structural data yet
+       HLCS       S        79    9.941612 1.459246                                True   2.071222              0.103938               0.186716 1.096340         0.997301 No structural data yet
+  MPHOSPH10       S       163    9.732651 1.389146                                True   2.071222              0.111466               0.156607 1.221423         0.996626 No structural data yet
+      RNPS1       S       155   10.130396 1.494296                                True   2.071222              0.096853               0.218729 0.979393         0.995951 No structural data yet
+        LBR       S        97   11.982361 1.718615                                True   2.071222              0.065150               0.408656 0.489276         0.995277 No structural data yet
+       SCAP       S       822    9.817923 1.417186                               False  -0.482481              0.273359               0.000415 3.586556         0.994602 No structural data yet
+       LMNA       T        10    9.399701 1.232589                                True   2.071222              0.110229               0.161287 1.200846         0.993927 No structural data yet
+       LMNA       S       403    9.395351 1.227916                                True   2.071222              0.110229               0.161287 1.200846         0.993252 No structural data yet
+      RIPK3       S       316    9.876063 1.431206                                True   2.071222              0.074219               0.346415 0.620994         0.992578 No structural data yet
+      CDCA2       S       977   10.375580 1.548039                                True   2.071222              0.051047               0.517545 0.305880         0.991903 No structural data yet
+      ROCK2       S      1379    9.627913 1.351759                                True   2.071222              0.074624               0.343782 0.627080         0.991228 No structural data yet
+    ARHGEF2       S       143   10.042931 1.477939                                True   2.071222              0.053805               0.495151 0.339334         0.990553 No structural data yet

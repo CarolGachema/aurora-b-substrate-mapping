@@ -1,0 +1,14 @@
+Fetching clinical data from cBioPortal...
+Pulled clinical data for 122 patients.
+
+Normalized TNBC status counts:
+TNBC_UPDATED_CLINICAL_STATUS
+Negative    91
+Positive    28
+Name: count, dtype: int64
+
+2 patients have an ID format that won't match the phosphoproteomics table (e.g. CPT000814) — they'll be excluded once we join, not an error.
+
+Saved 119 patients' TNBC status to data\tnbc_status_by_patient.csv
+  -> 28 TNBC-positive
+  -> 91 TNBC-negative
