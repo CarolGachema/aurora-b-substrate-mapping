@@ -1,16 +1,8 @@
 """
-Aurora B Substrate Mapping — Phase 2a: CPTAC Recon
+Aurora B Substrate Mapping 
+Phase 2a: CPTAC Recon
 ------------------------------------------------------
-Before writing the real filtering logic, we need to see the ACTUAL
-shape of CPTAC's breast cancer data — column naming, clinical fields,
-which data source has phosphoproteomics — rather than guessing and
-risking a wasted download.
 
-This will trigger a real download the first time you run it (CPTAC
-data isn't tiny — could take a while depending on your connection).
-That's expected, it's a one-time cost; it caches locally after that.
-
-Just run this, then paste me everything it prints.
 """
 
 import cptac
@@ -34,9 +26,7 @@ def main():
     print("\nAll clinical columns:")
     print(list(clinical.columns))
 
-    # No clean ER/PR/HER2 column exists in this table — receptor status is
-    # likely buried in the free-text pathology fields instead. Show us what's
-    # actually in there so we know how to parse it.
+    
     ihc_cols = [c for c in clinical.columns if "immunohistochemistry" in c.lower()]
     print("\nImmunohistochemistry-related columns:", ihc_cols)
     if ihc_cols:
@@ -45,8 +35,7 @@ def main():
             print(f"\n--- Sample non-null values from '{col}' ({len(non_null)} total) ---")
             print(non_null.head(10).to_list())
 
-    # Also check medical_history (another mssm-only data type) in case
-    # subtype/receptor info lives there instead.
+    # check medical_history (another mssm-only data type)
     print("\n" + "=" * 60)
     print("MEDICAL HISTORY DATA — checking for subtype/receptor info")
     print("=" * 60)
