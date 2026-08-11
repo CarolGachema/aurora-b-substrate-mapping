@@ -1,11 +1,7 @@
 """
-Aurora B Substrate Mapping — Phase 2f: Summary Figures
+Aurora B Substrate Mapping 
+Phase 2f: Summary Figures
 ------------------------------------------------------------------
-Builds the headline figures from the Phase 2e output
-(aurkb_candidates_tnbc_filtered.csv): PSSM-ranked candidates, each
-flagged for whether it's already a known AURKB site (Phase 1) and
-whether it's actually observed phosphorylated in TNBC tumor tissue
-(Phase 2e).
 
 Figures saved to figures/:
   1. fig1_pssm_score_distribution.png   — score distribution, known vs orphan
@@ -15,8 +11,7 @@ Figures saved to figures/:
 
 Also writes top20_orphan_tnbc_candidates.csv alongside the PNGs.
 
-Requires matplotlib — if it's not in your env yet:
-  pip install matplotlib
+Requires matplotlib 
 """
 
 from pathlib import Path
@@ -28,7 +23,7 @@ DATA_DIR = Path("data")
 CANDIDATES_CSV = DATA_DIR / "aurkb_candidates_tnbc_filtered.csv"
 FIG_DIR = Path("figures")
 
-# A small consistent palette, not matplotlib's defaults
+# Pallete
 COLOR_KNOWN = "#2E5266"          # deep blue-grey — known AURKB sites
 COLOR_ORPHAN = "#F2A541"         # amber — orphan/candidate sites
 COLOR_OBSERVED = "#3C8067"       # green — observed in TNBC
