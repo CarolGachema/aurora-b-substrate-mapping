@@ -1,22 +1,14 @@
 """
-Aurora B Substrate Mapping — Phase 5b: TCGA CIN Correlation
+Aurora B Substrate Mapping
+Phase 5b: TCGA CIN Correlation
 ------------------------------------------------------------------
 Correlates candidate gene expression against real chromosomal
 instability metrics (Aneuploidy Score, Fraction Genome Altered) across
 TCGA-BRCA's Basal-like ("BRCA_Basal") subtype samples.
 
-CAVEAT worth stating explicitly in any writeup: this Pan-Cancer Atlas
-clinical release doesn't include IHC-based ER/PR/HER2 status directly,
-so Basal-like PAM50 subtype is used as the TNBC proxy here instead of
-the same-definition TNBC status used in Phase 2. Basal-like and TNBC
-overlap heavily in the literature (most TNBC tumors are Basal-like)
-but aren't a perfect 1:1 match -- some Basal-like tumors aren't
-clinically TNBC and vice versa.
-
 For each of the TNBC-validated candidates (Phase 2e), tests whether
 higher mRNA expression associates with higher genomic instability
-across real tumors -- a cohort-scale signal independent of everything
-computed in Phases 1-4.
+across real tumors 
 
 Steps:
   1. Pull SAMPLE-level clinical data (the CIN metrics).
