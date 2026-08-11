@@ -1,15 +1,15 @@
 """
 Aurora B Substrate Mapping — Phase 2e: TNBC Phosphoproteomic Filter
 ------------------------------------------------------------------
-Phase 2d's recon told us what we need to know:
+Phase 2d's reports.
   - Phospho columns are a MultiIndex: (Name=gene symbol, Site, Peptide,
-    Database_ID=Ensembl protein ID). NOT UniProt-indexed.
+    Database_ID=Ensembl protein ID). 
   - 'Site' can pack multiple residues into one string for multiply-
-    phosphorylated peptides (e.g. "S19S22") — needs splitting into
+    phosphorylated peptides (e.g. "S19S22"), needs splitting into
     individual sites before it's comparable to Phase 1's per-residue
     candidates.
   - Sample IDs already match tnbc_status_by_patient.csv's patient_id
-    format directly (no suffix stripping needed) — 152/158 matched;
+    format directly (no suffix stripping needed)  152/158 matched,
     the rest lack a clinical TNBC call and are correctly excluded.
   - No tumor/normal suffix was found, so no extra tissue filtering step
     is needed beyond the TNBC-positive split itself.
@@ -24,15 +24,7 @@ This script:
      the observed sites via a UniProt->gene symbol map built from the
      FASTA headers.
 
-IMPORTANT CAVEAT: CPTAC positions are numbered against an Ensembl
-protein ID; Phase 1's positions are numbered against the UniProt
-canonical sequence. A (gene, position) match assumes the two numbering
-systems agree for that protein, which isn't guaranteed (alternate
-isoforms, differing residue numbering). This script checks residue-type
-agreement (S/T letter must match) on every hit, and separately reports
-cases where a gene+position lines up but the residue letter doesn't —
-those are numbering conflicts, not real non-matches, and are excluded
-from "observed" but logged so a few can be spot-checked manually.
+
 """
 
 import re
