@@ -1,24 +1,6 @@
 """
 Aurora B Substrate Mapping — Phase 3a: ColabFold Input Prep
 ------------------------------------------------------------------
-Prepares AlphaFold-Multimer/ColabFold-ready inputs for the top-ranked
-orphan candidates from Phase 2e: modeling each candidate as a
-substrate PEPTIDE docked against the AURKB KINASE DOMAIN, to check
-physical plausibility (does the region around the predicted
-phosphosite actually fit into the kinase's active-site cleft?).
-
-Two things this deliberately does NOT model — worth a line in your
-writeup:
-  - The predicted structure reflects AURKB in isolation, not the
-    biologically active, INCENP-bound conformation. A confident
-    prediction here is evidence of physical plausibility, not proof
-    of catalytic engagement in vivo.
-  - Peptide chains get no MSA (nothing to align a 21-mer against), so
-    ColabFold folds them largely from the kinase's structural context.
-    Low peptide-chain pLDDT is expected/normal — what matters most is
-    the inter-chain PAE (is the peptide placed confidently relative to
-    the kinase) and whether the S/T at the known register lands near
-    the catalytic residues.
 
 Steps:
   1. Fetch AURKB's canonical sequence + domain annotation from UniProt
