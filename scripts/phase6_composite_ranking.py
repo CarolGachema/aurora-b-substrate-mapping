@@ -1,49 +1,12 @@
 """
-Aurora B Substrate Mapping — Phase 6: Composite Ranking
+Aurora B Substrate Mapping 
+Phase 6: Composite Ranking
 ------------------------------------------------------------------
 Combines the independent evidence layers into ONE actual composite
 score per candidate site, instead of the AND-filter approach used in
 every figure up to this point (motif AND observed-in-TNBC AND network
--proximal, treated as separate yes/no checks rather than mathematically
-combined). This directly closes the gap flagged before Phase 5.
+-proximal, treated as separate yes/no checks.
 
-Evidence layers combined:
-  1. Motif strength       -- PSSM score (Phase 1), percentile-ranked
-  2. Network proximity     -- direct interactor of core mitotic
-                               machinery, hub-excluded (Phase 4)
-  3. Clinical correlation  -- Spearman correlation between the gene's
-                               expression and Aneuploidy Score across
-                               real TNBC-proxy tumors (Phase 5)
-  4. Structural evidence    -- reported as an annotation, NOT
-                               numerically scored (see caveat below)
-
-STATISTICAL CAVEAT ON THE CIN COMPONENT: ~1,063 genes were each
-correlation-tested against Aneuploidy Score at p<0.05, uncorrected for
-multiple testing. At that threshold, ~53 genes would come back
-"significant" by chance alone even with zero real signal. 92 actually
-cleared it -- more than chance predicts, so real signal likely exists
-in the group -- but no single gene's p-value should be trusted alone.
-This score treats CIN correlation as a soft, continuous nudge
-(weighted by significance, not a hard cutoff) for exactly this reason.
-
-WHY STRUCTURAL EVIDENCE ISN'T NUMERICALLY SCORED: only 3 of 1,070
-candidate genes have ANY experimental structural data (Phase 3
-manually checked PBRM1, SRRM2, RGL2 in Mol*). Scoring "no structural
-data" as worse than "confirmed accessible" would incorrectly penalize
-the other 1,067 candidates for a phase that hasn't reached them yet --
-not for lacking real evidence. Structural status is a plain annotation
-column instead, populated only where real data exists.
-
-Weights (documented, not hidden -- change these and rerun if you
-disagree with the balance):
-  - 50% motif strength (PSSM percentile)
-  - 25% network proximity (mitotic machinery interactor)
-  - 25% CIN correlation (significance-weighted Spearman rho)
-Motif score rests on the largest, most direct evidence base (281 real
-known sites); network and clinical correlation are more indirect,
-single-cohort signals -- hence the heavier motif weight. Reasonable
-people could weight this differently; the point of writing the formula
-out is that you can see exactly what you'd be changing.
 """
 
 from pathlib import Path
