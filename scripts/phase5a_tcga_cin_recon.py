@@ -5,12 +5,7 @@ Phases 1-4 used CPTAC (protein-level, ~150 patients) and OmniPath
 (interaction data). Neither touches chromosomal instability directly.
 This phase needs TCGA's much larger BRCA cohort (~1,000 patients),
 which has real genomic instability metrics (aneuploidy score, fraction
-genome altered) and mRNA expression data -- letting us test whether
-candidate genes' expression actually correlates with genomic
-instability across real tumors, not just whether they're phosphorylated.
-
-Same "list what's actually there before building on it" approach as
-Phase 2a/2b -- don't guess attribute names, print them and check.
+genome altered) and mRNA expression data 
 
 Target study: brca_tcga_pan_can_atlas_2018 (TCGA PanCancer Atlas) --
 the standard, most complete TCGA breast cancer resource on cBioPortal.
