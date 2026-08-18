@@ -1,5 +1,6 @@
 """
-Aurora B Substrate Mapping — Phase 4b: Network Context Figures
+Aurora B Substrate Mapping 
+Phase 4b: Network Context Figures
 ------------------------------------------------------------------
 Builds figures from Phase 4a's output (aurkb_candidates_network_context.csv):
 which TNBC-validated candidates sit directly next to known mitotic
@@ -13,13 +14,7 @@ Figures saved to figures/:
   4. fig4_top_combined_evidence.png      -- headline table: orphan + TNBC-observed +
                                              network-validated, your strongest candidates overall
 
-Note on fig2: reference-gene connectivity (total interaction partners per
-gene) is a snapshot of the numbers Phase 4a printed to console on its last
-run, not recomputed here -- if you rerun phase4a and the OmniPath data or
-GO annotations have shifted, update the REFERENCE_GENE_DEGREES dict below
-to match the new printout before trusting this one figure.
 
-Requires: pip install matplotlib (already installed if you ran Phase 2's figures script)
 """
 
 from pathlib import Path
@@ -31,7 +26,7 @@ DATA_DIR = Path("data")
 CANDIDATES_CSV = DATA_DIR / "aurkb_candidates_network_context.csv"
 FIG_DIR = Path("figures")
 
-# Snapshot from Phase 4a's last printed run -- see note above.
+# Snapshot from Phase 4a's last printed run 
 REFERENCE_GENE_DEGREES = {
     "ATM": 1178, "SMARCA4": 428, "GTF2B": 381, "SIN3A": 368, "PLK1": 334,
     "HSF1": 273, "SMARCB1": 259, "AURKB": 258, "AURKA": 204, "CCNB1": 180,
@@ -39,11 +34,11 @@ REFERENCE_GENE_DEGREES = {
 }
 HUB_DEGREE_THRESHOLD = 300
 
-COLOR_SPECIFIC = "#3C8067"       # green -- trustworthy specific hit
-COLOR_HUB_ONLY = "#F2A541"       # amber -- hub-driven only, questionable
-COLOR_NONE = "#C4C4C4"           # grey -- no interactor evidence
-COLOR_HUB_EXCLUDED = "#C0453D"   # red -- excluded hub gene
-COLOR_KEPT = "#2E5266"           # blue-grey -- kept reference gene
+COLOR_SPECIFIC = "#3C8067"       # green -trustworthy specific hit
+COLOR_HUB_ONLY = "#F2A541"       # amber -hub-driven only, questionable
+COLOR_NONE = "#C4C4C4"           # grey -no interactor evidence
+COLOR_HUB_EXCLUDED = "#C0453D"   # red -excluded hub gene
+COLOR_KEPT = "#2E5266"           # blue-grey - kept reference gene
 COLOR_KNOWN = "#2E5266"
 
 plt.rcParams.update({
