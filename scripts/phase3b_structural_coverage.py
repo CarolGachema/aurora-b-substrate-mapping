@@ -9,21 +9,6 @@ accessible -- a real, established, purely structural plausibility filter
 (buried residues are very unlikely to be phosphorylatable without local
 unfolding).
 
-IMPORTANT -- read before trusting the output:
-  Many of your candidates sit in large, intrinsically disordered
-  nuclear/splicing-associated proteins (SRRM2, ZFC3H1, TRA2A, etc.)
-  that are UNLIKELY to have full-length experimental structures at
-  all. "No structure found" here does NOT mean "implausible" --
-  disordered regions are actually enriched for real kinase substrates
-  precisely because they're accessible. Treat "no structure" as
-  inconclusive-leaning-plausible, not a strike against a candidate.
-
-  For candidates WITH structural coverage, this also makes a
-  simplifying assumption when mapping UniProt position -> PDB residue
-  numbering (linear interpolation from the SIFTS start/end anchors,
-  not a full per-residue alignment) -- fine for first-pass triage, but
-  worth spot-checking any borderline "buried" call manually in Mol*
-  before ruling a candidate out.
 
 Steps:
   1. Load the same 25-candidate shortlist used for Phase 3a.
@@ -31,7 +16,7 @@ Steps:
      for experimental structural coverage of the phosphosite position.
   3. Where coverage exists, download the structure and compute relative
      solvent accessibility for that residue with freesasa.
-  4. Save one summary CSV -- use it to pick which 3-5 candidates
+  4. Save one summary CSV - use it to pick which 3-5 candidates
      actually deserve a manual look (and screenshot) in Mol*.
 
 Requires: pip install freesasa requests pandas
@@ -175,7 +160,7 @@ def main():
                 "relative_sasa": rel_sasa, "accessibility": accessibility, "note": note,
             })
         except Exception as e:
-            # Never let one candidate's weird API response kill the whole run --
+            # Never let one candidate's weird API response kill the whole run
             # log it and keep going, same spirit as the source-fallback loops
             # elsewhere in this pipeline.
             print(f"  Unexpected error processing this candidate: {type(e).__name__}: {e}")
